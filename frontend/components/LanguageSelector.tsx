@@ -50,9 +50,13 @@ export const LanguageSelector = ({language='en'}: LanguageSelectorProps) => {
 
   return (
     <>
-      {languages.map(({ code, label }: Language) => {
+      {languages.map(({ code }: Language) => {
           return (
-            <button key={code} onClick={() => handleLanguageChange(code)}>
+            <button key={code} onClick={() => handleLanguageChange(code)}
+              style={{ backgroundColor: code === language ? '#FFF' : 'transparent',
+                       boxShadow: 'none',
+                       border:    0,
+              }}>
               {(() => { 
                 switch(code) {
                   case 'en': return <IconFlagUS />;
