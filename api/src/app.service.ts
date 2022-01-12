@@ -13,6 +13,6 @@ export class AppService {
   }
 
   async getLivenessProbeInformation(): Promise<string> {
-    return '';
+    return "I'm alive";
   }
 }
