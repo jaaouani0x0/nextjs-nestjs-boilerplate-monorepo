@@ -1,16 +1,41 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { usePersistLocaleCookie } from '../src/hooks/usePersistLocalCookie';
+import {
+  IconFlagFR,
+  IconFlagUS
+} from 'material-ui-flags';
 
 export type LanguageSelectorProps = {
   language?: string
 };
 
+type Language = {
+  code: string;
+  label: string;
+};
+
 const languages = [
-  { code: 'fr', label: 'FR'},
-  { code: 'en', label: 'EN'},
-  { code: 'jp', label: 'JP'}
+  { code: 'fr', label: 'FR' },
+  { code: 'en', label: 'EN' },
+  { code: 'jp', label: 'JP' }
 ];
+
+/* const select = (language: string) : JSX.Element => {
+  switch(language) {
+    case 'EN': return <IconFlagUS />;
+    case 'FR': return <IconFlagFR />;
+    case 'JP': return <IconFlagJP />;
+    default:   return <IconFlagFR />;
+  }
+}; */
+
+export const JPFlag = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={35} height={25} {...props}>
+    <path fill="#fff" d="M0 0h900v600H0z" />
+    <circle fill="#bc002d" cx={18} cy={14} r={10} />
+  </svg>
+);
 
 export const LanguageSelector = ({language='en'}: LanguageSelectorProps) => {
   const router = useRouter();
@@ -25,10 +50,17 @@ export const LanguageSelector = ({language='en'}: LanguageSelectorProps) => {
 
   return (
     <>
-      {languages.map(({ code, label }) => {
+      {languages.map(({ code, label }: Language) => {
           return (
             <button key={code} onClick={() => handleLanguageChange(code)}>
-              {label} {language == code ? '(selected)' : ''}
+              {(() => { 
+                switch(code) {
+                  case 'en': return <IconFlagUS />;
+                  case 'fr': return <IconFlagFR />;
+                  case 'jp': return <JPFlag />;
+                  default:   return <IconFlagFR />;
+                }
+              })()}
             </button>
           );
         })
