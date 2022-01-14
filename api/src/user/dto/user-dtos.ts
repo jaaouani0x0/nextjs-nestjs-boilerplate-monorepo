@@ -16,6 +16,7 @@ export class UserDTO {
   language: string;
   role: UserRole;
   age?: number;
+  phone?: string;
 
   setUser = (userDAO: any): void => {
     this.id = userDAO.id;

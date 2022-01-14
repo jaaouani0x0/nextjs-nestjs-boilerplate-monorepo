@@ -15,7 +15,6 @@ module.exports = function(apiBasePath = null) {
 
   const API_KEY = process.env.API_KEY || 'API-3mxgr5$^956rd$*y^$abimni5b8xsxi2m@k9b4vr-TPL';
   const API_BASE_URL = process.env.API_URL || 'http://localhost:8000';
-
   const applicationApiBasePath = '^' + (apiBasePath ? apiBasePath : '/api');
   const apiPathRewriteConf = {};
   apiPathRewriteConf[applicationApiBasePath] = process.env.API_PREFIX ? '/' + process.env.API_PREFIX : '';

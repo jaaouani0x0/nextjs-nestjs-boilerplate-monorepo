@@ -15,8 +15,14 @@ export class UserController {
 
     const user: UserDTO =
       await this.userService.findUserProfileByEmail(email);
-
+      
     return user;
+  }
+
+  @Get('/v1/users')
+  async users() {
+    let users = await this.userService.fetchUsers();
+    return users;
   }
 
   @Post('/v1/user')
