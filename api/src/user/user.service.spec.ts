@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { UserMockService } from './mock/user.service.mock';
 
-
 describe('UserService', () => {
   let service: UserService;
 
@@ -28,4 +27,10 @@ describe('UserService', () => {
     expect(user).toBeDefined();
     expect(user.firstName).toBe('First name for testing purpose');
   });
+
+  it('Should be able to retrieve a list of users at least of 10', async () => {
+    const users = await service.fetchUsers();
+    expect(users).toBeDefined();
+    expect(users.length).toBeGreaterThanOrEqual(10);
+  })
 });

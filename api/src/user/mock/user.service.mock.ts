@@ -1,6 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { UserDTO } from '../dto/user-dtos';
-
+import {
+  internet,
+  name,
+  random,
+  phone
+} from 'faker';
 
 @Injectable()
 export class UserMockService {
@@ -27,5 +32,19 @@ export class UserMockService {
     return {
       ...newUserProfile,
     };
+  };
+
+  fetchUsers = async () : Promise<UserDTO[]>  => {
+    return new Array(10)
+            .fill(null)
+            .map(() => {
+                let user = new UserDTO();
+                    user.email = internet.email();
+                    user.firstName = name.firstName();
+                    user.lastName = name.lastName();
+                    user.language = random.arrayElement(['fr', 'en', 'jp']);
+                    user.phone = phone.phoneNumber()
+                return user;
+            });
   };
 }
